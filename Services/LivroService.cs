@@ -32,13 +32,13 @@ namespace Sistema_Biblioteca.Services
         {
             var livros = await livroRepository.GetAll();
 
-            return livros.Select(livro => new ListarLivrosDto { Id = livro.Id, Nome = livro.Nome }).ToList();
+            return livros.Select(livro => new ListarLivrosDto { Id = livro.Id, Nome = livro.Nome, DataCadastro = livro.DataCadastro }).ToList();
         }
 
         public async Task<ListarLivrosDto> GetLivroByIdAsync(int id)
         {
             var livro = await livroRepository.GetById(id) ?? throw new Exception("Livro não encontrado");
-            return new ListarLivrosDto { Id = livro.Id, Nome = livro.Nome };
+            return new ListarLivrosDto { Id = livro.Id, Nome = livro.Nome, DataCadastro = livro.DataCadastro };
         }
 
         public async Task<ListarLivrosDto> UpdateLivroAsync(int id, AtualizarLivroDto dto)
