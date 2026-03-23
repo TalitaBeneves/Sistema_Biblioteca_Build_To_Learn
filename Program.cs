@@ -10,8 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 var conectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<BibliotecaContext>(options => options.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString)).UseSnakeCaseNamingConvention());
-builder.Services.AddScoped<IBibliotecaLivroRepositorie, BibliotecaLivroRepositorie>();
-builder.Services.AddScoped<IBibliotecaLivroService, BibliotecaLivroService>();
+builder.Services.AddScoped<ILivroRepository, LivroRepository>();
+builder.Services.AddScoped<ILivroService, LivroService>();
 
 
 // Add services to the container.
