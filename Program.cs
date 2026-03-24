@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using Sistema_Biblioteca.Data;
-using Sistema_Biblioteca.Repositories;
-using Sistema_Biblioteca.Repositories.Interface;
+using Sistema_Biblioteca.Repositories.Emprestimos;
+using Sistema_Biblioteca.Repositories.Livros;
 using Sistema_Biblioteca.Services;
 using Sistema_Biblioteca.Services.Interface;
 
@@ -12,7 +12,8 @@ var conectionString = builder.Configuration.GetConnectionString("DefaultConnecti
 builder.Services.AddDbContext<BibliotecaContext>(options => options.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString)).UseSnakeCaseNamingConvention());
 builder.Services.AddScoped<ILivroRepository, LivroRepository>();
 builder.Services.AddScoped<ILivroService, LivroService>();
-
+builder.Services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
+builder.Services.AddScoped<IEmprestimoService, EmprestimoService>();
 
 // Add services to the container.
 

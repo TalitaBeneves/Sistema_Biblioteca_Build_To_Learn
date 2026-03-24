@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sistema_Biblioteca.Data;
 using Sistema_Biblioteca.Entities;
-using Sistema_Biblioteca.Repositories.Interface;
 
-namespace Sistema_Biblioteca.Repositories
+namespace Sistema_Biblioteca.Repositories.Livros
 {
     public class LivroRepository : ILivroRepository
     {
@@ -24,7 +23,7 @@ namespace Sistema_Biblioteca.Repositories
             return await bibliotecaContext.Livros.FindAsync(id);
         }
 
-        public async Task<Livro> Create(Livro livro)
+        public async Task<Livro> Add(Livro livro)
         {
             await bibliotecaContext.Livros.AddAsync(livro);
             await bibliotecaContext.SaveChangesAsync();
