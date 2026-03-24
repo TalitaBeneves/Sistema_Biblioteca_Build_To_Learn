@@ -52,5 +52,15 @@ namespace Sistema_Biblioteca.Services
             await livroRepository.Update(livro);
             return new LivroReponseDto { Id = livro.Id, Nome = livro.Nome };
         }
+
+        public Task Reservar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CancelarReserva(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

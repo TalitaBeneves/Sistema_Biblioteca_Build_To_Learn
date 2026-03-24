@@ -25,7 +25,7 @@ namespace Sistema_Biblioteca.Services
             if (id <= 0)
                 throw new ArgumentException("O id do empréstimo deve ser maior que zero.");
 
-            var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Emprestimo não encontrado."); ;
+            var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Emprétimo não encontrado."); ;
             return new EmprestimoResponseDto { Id = emprestimo.Id, UsuarioId = emprestimo.UsuarioId, LivroId = emprestimo.LivroId, DataEmprestimo = emprestimo.DataEmprestimo, DataDevolucao = emprestimo.DataDevolucao };
         }
 
@@ -46,7 +46,7 @@ namespace Sistema_Biblioteca.Services
 
         public async Task<EmprestimoResponseDto> UpdateEmprestimoAsync(int id, AtualizarEmprestimoDto dto)
         {
-            var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Livro não encontrado");
+            var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Emprétimo não encontrado");
             emprestimo.UsuarioId = dto.UsuarioId;
             emprestimo.LivroId = dto.LivroId;
 
@@ -59,11 +59,16 @@ namespace Sistema_Biblioteca.Services
             if (id <= 0)
                 throw new ArgumentException("O id do empréstimo deve ser maior que zero.");
 
-            var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Emprestimo não encontrado."); ;
+            var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Emprétimo não encontrado."); ;
             await emprestimoRepository.Delete(emprestimo);
         }
 
         public Task DevolverLivro(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Renovar(int id)
         {
             throw new NotImplementedException();
         }
