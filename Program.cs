@@ -7,12 +7,15 @@ using Sistema_Biblioteca.Repositories.Emprestimos;
 using Sistema_Biblioteca.Repositories.Livros;
 using Sistema_Biblioteca.Services;
 using Sistema_Biblioteca.Services.Interface;
+using FluentValidation;
+using Sistema_Biblioteca.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 var conectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<BibliotecaContext>(options => options.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString)).UseSnakeCaseNamingConvention());
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddValidatorsFromAssemblyContaining<CadastrarLivroDtoValidator>();
 
 builder.Services.AddScoped<ILivroRepository, LivroRepository>();
 builder.Services.AddScoped<ILivroService, LivroService>();

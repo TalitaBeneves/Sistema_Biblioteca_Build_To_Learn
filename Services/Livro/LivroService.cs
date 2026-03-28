@@ -1,4 +1,5 @@
-﻿using Sistema_Biblioteca.Controllers.Dtos;
+﻿using FluentValidation;
+using Sistema_Biblioteca.Controllers.Dtos;
 using Sistema_Biblioteca.Entities;
 using Sistema_Biblioteca.Repositories.Livros;
 using Sistema_Biblioteca.Services.Interface;
@@ -8,18 +9,20 @@ namespace Sistema_Biblioteca.Services
     public class LivroService : ILivroService
     {
         private readonly ILivroRepository livroRepository;
+        private readonly IValidator<CadastrarLivroDto> validator;
 
-        public LivroService(ILivroRepository livroRepository)
+        public LivroService(ILivroRepository livroRepository, IValidator<CadastrarLivroDto> validator)
         {
             this.livroRepository = livroRepository;
+            this.validator = validator;
         }
 
         public async Task<LivroReponseDto> CreateLivroAsync(CadastrarLivroDto livro)
         {
-            if (string.IsNullOrEmpty(livro.Nome))
-            {
-                throw new Exception("Não não pode estar vazio.");
-            }
+            var validationResult = await validator.ValidateAsync(livro);
+            if (!validationResult.IsValid)
+                throw new ValidationException(validationResult.Errors);
+
             var request = new Livro { Nome = livro.Nome, DataCadastro = DateTime.UtcNow };
             await livroRepository.Add(request);
 
