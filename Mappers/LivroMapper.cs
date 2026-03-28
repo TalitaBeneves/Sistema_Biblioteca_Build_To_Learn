@@ -44,5 +44,18 @@ namespace Sistema_Biblioteca.Mappers
             };
         }
 
+        public void UpdateEntity(Livro livro, LivroRequestDto dto)
+        {
+            livro.Titulo = dto.Titulo;
+            livro.Autor = dto.Autor;
+            livro.Categoria = dto.Categoria;
+            livro.ISBN = dto.ISBN;
+            livro.Ano = dto.Ano;
+            livro.Edicao = dto.Edicao;
+            livro.Idioma = dto.Idioma;
+            livro.NumeroDePaginas = dto.NumeroDePaginas;
+            livro.Descricao = dto.Descricao;
+            livro.SobreAutor = dto.SobreAutor;
+        }
     }
 }

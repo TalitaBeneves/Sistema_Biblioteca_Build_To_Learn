@@ -6,7 +6,8 @@ namespace Sistema_Biblioteca.Mappers
 {
     public interface ILivroMapper
     {
-        Livro ToEntity(LivroRequestDto cadastrarLivroDto);
+        Livro ToEntity(LivroRequestDto dto);
+        LivroResponseDto UpdateEntity(Livro livro, LivroRequestDto dto);
         LivroResponseDto ToResponseDto(Livro livro);
     }
 }
