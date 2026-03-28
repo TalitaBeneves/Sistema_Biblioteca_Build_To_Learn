@@ -1,6 +1,6 @@
-﻿namespace Sistema_Biblioteca.Entities
+﻿namespace Sistema_Biblioteca.DTOs.Livro.Response
 {
-    public class Livro
+    public class LivroResponseDto
     {
         public int Id { get; set; }
         public string Titulo { get; set; } = String.Empty;

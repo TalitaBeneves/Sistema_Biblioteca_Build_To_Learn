@@ -9,18 +9,20 @@ using Sistema_Biblioteca.Services;
 using Sistema_Biblioteca.Services.Interface;
 using FluentValidation;
 using Sistema_Biblioteca.Validators;
+using Sistema_Biblioteca.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 var conectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<BibliotecaContext>(options => options.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString)).UseSnakeCaseNamingConvention());
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-builder.Services.AddValidatorsFromAssemblyContaining<CadastrarLivroDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<LivroDtoValidator>();
 
 builder.Services.AddScoped<ILivroRepository, LivroRepository>();
 builder.Services.AddScoped<ILivroService, LivroService>();
 builder.Services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
 builder.Services.AddScoped<IEmprestimoService, EmprestimoService>();
+builder.Services.AddScoped<ILivroMapper, LivroMapper>();
 
 // Add services to the container.
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sistema_Biblioteca.Controllers.Dtos;
+using Sistema_Biblioteca.DTOs.Livro.Request;
 using Sistema_Biblioteca.Services.Interface;
 
 namespace Sistema_Biblioteca.Controllers
@@ -30,17 +30,17 @@ namespace Sistema_Biblioteca.Controllers
         }
 
         [HttpPost()]
-        public async Task<IActionResult> CadastrarLivro([FromBody] CadastrarLivroDto livro)
+        public async Task<IActionResult> CadastrarLivro([FromBody] LivroRequestDto livro)
         {
             await bibliotecaLivroService.CreateLivroAsync(livro);
-            return Ok(new { message = $"Livro '{livro.Nome}' cadastrado com sucesso!" });
+            return Ok(new { message = $"Livro '{livro.Titulo}' cadastrado com sucesso!" });
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> AtualizaLivro([FromRoute] int id, [FromBody] AtualizarLivroDto livro)
+        public async Task<IActionResult> AtualizaLivro([FromRoute] int id, [FromBody] LivroRequestDto livro)
         {
             await bibliotecaLivroService.UpdateLivroAsync(id, livro);
-            return Ok(new { message = $"Livro '{livro.Nome}' atualizado com sucesso!" });
+            return Ok(new { message = $"Livro '{livro.Titulo}' atualizado com sucesso!" });
         }
 
         [HttpDelete("{id}")]

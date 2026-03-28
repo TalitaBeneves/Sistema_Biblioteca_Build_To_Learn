@@ -1,10 +1,10 @@
-﻿namespace Sistema_Biblioteca.Entities
+﻿namespace Sistema_Biblioteca.DTOs.Livro.Request
 {
-    public class Livro
+    public class LivroRequestDto
     {
         public int Id { get; set; }
+        public IFormFile Capa { get; set; } = null!;
         public string Titulo { get; set; } = String.Empty;
-        public string UrlCapa { get; set; } = String.Empty;
         public string Autor { get; set; } = String.Empty;
         public string? SobreAutor { get; set; }
         public string Categoria { get; set; } = String.Empty;
@@ -14,6 +14,5 @@
         public int Edicao { get; set; }
         public string Idioma { get; set; } = String.Empty;
         public int NumeroDePaginas { get; set; }
-        public DateTime DataCadastro { get; set; }
     }
 }
