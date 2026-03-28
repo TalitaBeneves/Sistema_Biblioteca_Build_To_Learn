@@ -16,6 +16,10 @@ namespace Sistema_Biblioteca.Services
 
         public async Task<LivroReponseDto> CreateLivroAsync(CadastrarLivroDto livro)
         {
+            if (string.IsNullOrEmpty(livro.Nome))
+            {
+                throw new Exception("Não não pode estar vazio.");
+            }
             var request = new Livro { Nome = livro.Nome, DataCadastro = DateTime.UtcNow };
             await livroRepository.Add(request);
 
