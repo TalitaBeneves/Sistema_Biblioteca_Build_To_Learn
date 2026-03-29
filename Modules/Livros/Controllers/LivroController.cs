@@ -2,7 +2,7 @@
 using Sistema_Biblioteca.Modules.Livros.DTOs.Request;
 using Sistema_Biblioteca.Modules.Livros.Services;
 
-namespace Sistema_Biblioteca.Controllers
+namespace Sistema_Biblioteca.Modules.Livros.Controllers
 {
     [ApiController]
     [Route("api/livros")]
@@ -48,6 +48,20 @@ namespace Sistema_Biblioteca.Controllers
         {
             await bibliotecaLivroService.DeleteLivroAsync(id);
             return Ok(new { message = $"Livro deletado com sucesso!" });
+        }
+
+        [HttpPut("CriarReserva{id}")]
+        public async Task<IActionResult> CriarReserva([FromRoute] int id)
+        {
+            var result = await bibliotecaLivroService.CriarReservaAsync(id);
+            return Ok(new { message = $"Livro '{result.Titulo}' reservado com sucesso!" });
+        }
+
+        [HttpPut("CancelarReserva{id}")]
+        public async Task<IActionResult> CancelarReserva([FromRoute] int id)
+        {
+            var result = await bibliotecaLivroService.CancelarReservaAsync(id);
+            return Ok(new { message = $"Reserva do livro '{result.Titulo}' cancelada com sucesso!" });
         }
     }
 }

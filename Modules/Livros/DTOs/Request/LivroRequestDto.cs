@@ -14,5 +14,7 @@
         public int Edicao { get; set; }
         public string Idioma { get; set; } = string.Empty;
         public int NumeroDePaginas { get; set; }
+        public bool? IsReservado { get; set; }
+        public DateTime? DataCancelamentoReserva { get; set; }
     }
 }

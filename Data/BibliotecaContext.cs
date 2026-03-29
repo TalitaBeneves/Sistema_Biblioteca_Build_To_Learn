@@ -10,6 +10,7 @@ namespace Sistema_Biblioteca.Data
         public BibliotecaContext(DbContextOptions<BibliotecaContext> options) : base(options) { }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Livro> Livros { get; set; }
+        public DbSet<ItemLivro> ItemLivros { get; set; }
         public DbSet<Emprestimo> Emprestimos { get; set; }
     }
 }

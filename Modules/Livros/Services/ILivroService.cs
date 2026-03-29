@@ -10,5 +10,8 @@ namespace Sistema_Biblioteca.Modules.Livros.Services
         Task<LivroResponseDto> CreateLivroAsync(LivroRequestDto livro);
         Task<LivroResponseDto> UpdateLivroAsync(int id, LivroRequestDto livro);
         Task DeleteLivroAsync(int id);
+
+        Task<LivroResponseDto> CriarReservaAsync(int id);
+        Task<LivroResponseDto> CancelarReservaAsync(int id);
     }
 }

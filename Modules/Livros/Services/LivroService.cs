@@ -3,6 +3,7 @@ using Sistema_Biblioteca.Modules.Livros.DTOs.Request;
 using Sistema_Biblioteca.Modules.Livros.DTOs.Response;
 using Sistema_Biblioteca.Modules.Livros.Mappers;
 using Sistema_Biblioteca.Modules.Livros.Repositories;
+using Sistema_Biblioteca.Shared;
 
 namespace Sistema_Biblioteca.Modules.Livros.Services
 {
@@ -53,7 +54,7 @@ namespace Sistema_Biblioteca.Modules.Livros.Services
         {
             var livros = await livroRepository.GetAll();
 
-            return livros.Select(livro => livroMapper.ToResponseDto(livro)).ToList();
+            return livros.Select(livro => livroMapper.ToResponseDto(livro));
         }
 
         public async Task<LivroResponseDto> GetLivroByIdAsync(int id)
@@ -70,7 +71,7 @@ namespace Sistema_Biblioteca.Modules.Livros.Services
 
             var livro = await livroRepository.GetById(id) ?? throw new Exception("Livro não encontrado");
 
-           livroMapper.UpdateEntity(livro, dto);
+            livroMapper.UpdateEntity(livro, dto);
             if (dto.Capa != null)
             {
                 var pasta = Path.Combine("wwwroot/images/livros");
@@ -96,14 +97,43 @@ namespace Sistema_Biblioteca.Modules.Livros.Services
             return livroMapper.ToResponseDto(livro);
         }
 
-        public Task Reservar(int id)
+        public async Task<LivroResponseDto> CriarReservaAsync(int id)
         {
-            throw new NotImplementedException();
+            /*
+                Vamos precisar do Id do livro
+                Futuramente saber o usuário que esta reservando
+                atualizar a prop isReservado
+            */
+
+            var livro = livroRepository.GetById(id).Result ?? throw new Exception("Livro não encontrado");
+            livro.IsReservado = true;
+
+            await livroRepository.Update(livro);
+            return livroMapper.ToResponseDto(livro);
         }
 
-        public Task CancelarReserva(int id)
+        public async Task<LivroResponseDto> CancelarReservaAsync(int id)
         {
-            throw new NotImplementedException();
+            /*
+                Vamos precisar do Id do livro
+                Futuramente saber o usuário que esta cancelando
+                atualizar a prop isReservado e DataCadastroReserva
+            */
+
+            var livro = livroRepository.GetById(id).Result ?? throw new Exception("Livro não encontrado");
+            //foreach (var item in livro.Itens)
+            //{
+            //    if (item.Status == Enums.StatusLivro.Disponivel)
+            //        item.Status = Enums.StatusLivro.Reservado;
+
+
+            //}
+            var livroDisponivel = livro.Itens.FirstOrDefault(x => x.Status == Enums.StatusLivro.Disponivel);
+            if (livroDisponivel != null)
+                livroDisponivel.Status = Enums.StatusLivro.Reservado;
+
+            await livroRepository.Update(livro);
+            return livroMapper.ToResponseDto(livro);
         }
     }
 }
