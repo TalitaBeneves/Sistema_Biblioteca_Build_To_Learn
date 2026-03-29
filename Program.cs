@@ -11,6 +11,7 @@ using Sistema_Biblioteca.Modules.Emprestimos.Services;
 using Sistema_Biblioteca.Modules.Emprestimos.Repositories;
 using Sistema_Biblioteca.Shared.Exceptions;
 using Sistema_Biblioteca.Modules.Emprestimos.Mappers;
+using Sistema_Biblioteca.Modules.Emprestimos.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 var conectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<BibliotecaContext>(options => options.UseMySql(con
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddValidatorsFromAssemblyContaining<LivroDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<EmprestimoRequestDtoValidator>();
 
 builder.Services.AddScoped<ILivroRepository, LivroRepository>();
 builder.Services.AddScoped<ILivroService, LivroService>();
