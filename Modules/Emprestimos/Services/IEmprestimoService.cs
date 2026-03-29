@@ -1,4 +1,5 @@
-﻿using Sistema_Biblioteca.DTOs.Emprestimo;
+﻿using Sistema_Biblioteca.Modules.Emprestimos.DTOs.Request;
+using Sistema_Biblioteca.Modules.Emprestimos.DTOs.Response;
 
 namespace Sistema_Biblioteca.Modules.Emprestimos.Services
 {
@@ -6,9 +7,9 @@ namespace Sistema_Biblioteca.Modules.Emprestimos.Services
     {
         Task<IEnumerable<EmprestimoResponseDto>> GetAllEmprestimosAsync();
         Task<EmprestimoResponseDto?> GetEmprestimoByIdAsync(int id);
-        Task<EmprestimoResponseDto> CreateEmprestimoAsync(CadastrarEmprestimoDto dto);
-        Task<EmprestimoResponseDto> UpdateEmprestimoAsync(int id, AtualizarEmprestimoDto dto);
-        Task DeleteEmprestimoAsync(int id);
-        Task DevolverLivro(int id);
+        Task<EmprestimoResponseDto> CreateEmprestimoAsync(EmprestimoRequestDto dto);
+        Task<EmprestimoResponseDto> UpdateEmprestimoAsync(int id, EmprestimoRequestDto dto);
+        Task<EmprestimoResponseDto> DeleteEmprestimoAsync(int id);
+        Task<EmprestimoResponseDto> DevolverLivro(int id);
     }
 }

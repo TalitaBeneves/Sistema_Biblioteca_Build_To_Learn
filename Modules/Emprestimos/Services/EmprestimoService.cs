@@ -1,7 +1,5 @@
-﻿using Sistema_Biblioteca.DTOs.Emprestimo;
-using Sistema_Biblioteca.Modules.Emprestimos.DTOs.Request;
+﻿using Sistema_Biblioteca.Modules.Emprestimos.DTOs.Request;
 using Sistema_Biblioteca.Modules.Emprestimos.DTOs.Response;
-using Sistema_Biblioteca.Modules.Emprestimos.Entities;
 using Sistema_Biblioteca.Modules.Emprestimos.Mappers;
 using Sistema_Biblioteca.Modules.Emprestimos.Repositories;
 
@@ -58,14 +56,23 @@ namespace Sistema_Biblioteca.Modules.Emprestimos.Services
             await emprestimoRepository.Delete(emprestimo);
         }
 
-        public Task DevolverLivro(int id)
+        public async Task<EmprestimoResponseDto> DevolverLivro(int id)
         {
-            throw new NotImplementedException();
+            var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Emprétimo não encontrado.");
+            emprestimo.DataDevolucao = DateTime.UtcNow;
+
+            await emprestimoRepository.Update(emprestimo);
+            return emprestimoMapper.ToResponseDto(emprestimo);
         }
 
-        public Task Renovar(int id)
+        public async Task<EmprestimoResponseDto> Renovar(int id)
         {
-            throw new NotImplementedException();
+            var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Emprétimo não encontrado.");
+            emprestimo.DataLimite = DateTime.UtcNow.AddDays(20);
+            emprestimo.IsRenovado = true;
+
+            await emprestimoRepository.Update(emprestimo);
+            return emprestimoMapper.ToResponseDto(emprestimo);
         }
     }
 }
