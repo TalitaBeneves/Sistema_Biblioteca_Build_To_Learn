@@ -56,7 +56,7 @@ namespace Sistema_Biblioteca.Modules.Emprestimos.Services
             await emprestimoRepository.Delete(emprestimo);
         }
 
-        public async Task<EmprestimoResponseDto> DevolverLivro(int id)
+        public async Task<EmprestimoResponseDto> DevolverEmprestimoAsync(int id)
         {
             var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Emprétimo não encontrado.");
             emprestimo.DataDevolucao = DateTime.UtcNow;
@@ -65,7 +65,7 @@ namespace Sistema_Biblioteca.Modules.Emprestimos.Services
             return emprestimoMapper.ToResponseDto(emprestimo);
         }
 
-        public async Task<EmprestimoResponseDto> Renovar(int id)
+        public async Task<EmprestimoResponseDto> RenovarAsync(int id)
         {
             var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Emprétimo não encontrado.");
             emprestimo.DataLimite = DateTime.UtcNow.AddDays(20);
