@@ -68,7 +68,7 @@ namespace Sistema_Biblioteca.Modules.Emprestimos.Services
         public async Task<EmprestimoResponseDto> RenovarAsync(int id)
         {
             var emprestimo = await emprestimoRepository.GetById(id) ?? throw new Exception("Emprétimo não encontrado.");
-            emprestimo.DataLimite = DateTime.UtcNow.AddDays(20);
+            emprestimo.DataLimite = DateTime.UtcNow.AddDays(30);
             emprestimo.IsRenovado = true;
 
             await emprestimoRepository.Update(emprestimo);

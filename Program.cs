@@ -10,6 +10,7 @@ using Sistema_Biblioteca.Modules.Livros.Validators;
 using Sistema_Biblioteca.Modules.Emprestimos.Services;
 using Sistema_Biblioteca.Modules.Emprestimos.Repositories;
 using Sistema_Biblioteca.Shared.Exceptions;
+using Sistema_Biblioteca.Modules.Emprestimos.Mappers;
 
 var builder = WebApplication.CreateBuilder(args);
 var conectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -20,9 +21,10 @@ builder.Services.AddValidatorsFromAssemblyContaining<LivroDtoValidator>();
 
 builder.Services.AddScoped<ILivroRepository, LivroRepository>();
 builder.Services.AddScoped<ILivroService, LivroService>();
-builder.Services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
-builder.Services.AddScoped<IEmprestimoService, EmprestimoService>();
 builder.Services.AddScoped<ILivroMapper, LivroMapper>();
+builder.Services.AddScoped<IEmprestimoService, EmprestimoService>();
+builder.Services.AddScoped<IEmprestimoRepository, EmprestimoRepository>();
+builder.Services.AddScoped<IEmprestimoMapper, EmprestimoMapper>();
 
 // Add services to the container.
 
@@ -34,7 +36,7 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(op =>
         {
             Status = StatusCodes.Status400BadRequest,
             Title = "Erro de validação no JSON",
-            Detail = "Um ou mais campos enviados estãõ com formato incorreto.",
+            Detail = "Um ou mais campos enviados estão com formato incorreto.",
             Instance = context.HttpContext.Request.Path
         };
 
