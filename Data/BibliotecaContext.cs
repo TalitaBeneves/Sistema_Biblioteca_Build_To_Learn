@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Sistema_Biblioteca.Entities;
+using Sistema_Biblioteca.Modules.Emprestimos.Entities;
+using Sistema_Biblioteca.Modules.Livros.Entities;
+using Sistema_Biblioteca.Modules.Usuairo.Entities;
 
 namespace Sistema_Biblioteca.Data
 {

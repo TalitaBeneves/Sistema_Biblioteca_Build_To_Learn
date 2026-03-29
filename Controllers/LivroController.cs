@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sistema_Biblioteca.DTOs.Livro.Request;
-using Sistema_Biblioteca.Services.Interface;
+using Sistema_Biblioteca.Modules.Livros.DTOs.Request;
+using Sistema_Biblioteca.Modules.Livros.Services;
 
 namespace Sistema_Biblioteca.Controllers
 {

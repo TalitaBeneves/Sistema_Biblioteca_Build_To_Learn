@@ -25,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Modules\Emprestimos\Mappers\" />
+    <Folder Include="Modules\Emprestimos\DTOs\" />
+    <Folder Include="Modules\Emprestimos\Validators\" />
     <Folder Include="wwwroot\images\livros\" />
   </ItemGroup>
 
